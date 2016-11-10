@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lintubongari</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<script src = "http://code.jquery.com/jquery-latest.min.js" type = "text/javascript"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="http://tablesorter.com/__jquery.tablesorter.min.js"></script>
+		<script src="https://use.fontawesome.com/ea842f5baa.js"></script>
+		<script src = "scripts.js"></script>
+	</head>
+	<body class="w3-light-grey">	
+	<!--HEROIMAGE-->
+		<div id="heroimage" class="w3-display-container w3-center">
+			<img src="heroimage.jpg" style="width:100%;">
+			<div class="w3-display-middle w3-text-white">
+				<h2 class="w3-xxxlarge" style="border: solid 1px white; padding: 50px;">LINTUBONGARI</h2><br><button id="aloitusnappi" class="w3-btn w3-light-green w3-text-white">Aloita</button>
+			</div>
+		</div>
+	<!--TERVETULOA-DIV JA OHJEET-->
+		<div id="tervetuloa" class="w3-row w3-container w3-light-grey w3-center" style="padding-top: 100px; margin-left: 10%; margin-right: 10%;">
+			<h2><b>TERVETULOA</b></h2>
+			<div class="w3-third w3-center" style="padding:50px;">
+				<i class="fa fa-sliders fa-5x" style="padding: 40px;"></i>
+				<h4><b>VALITSE</b></h4>
+				<p>Valitse alapuolelta laskenta-ajanjakso, jolta haluat nähdä tulokset.</p>
+			</div>
+			<div class="w3-third w3-center" style="padding:50px;">
+				<i class="fa fa-search fa-5x" style="padding: 40px;"></i>
+				<h4><b>TARKASTELE</b></h4>
+				<p>Tarkastele lintulaskelman tuloksia, jotka ilmestyvät taulukkoon. Voit lajitella tulokset reitin tai kunnan mukaan.</p>
+			</div>
+			<div class="w3-third w3-center" style="padding:50px;">
+				<i class="fa fa-mouse-pointer fa-5x" style="padding: 40px;"></i>
+				<h4><b>KLIKKAA</b></h4>
+				<p>Klikkaa DocumentID-linkkiä taulukon vasemmasta reunasta nähdäksesi yksittäisen laskelman tulokset.</p>
+			</div>	
+		</div>
+	<!--VALITSE LASKENTA-AJANJAKSO-DIV-->
+		<div id="laskenta" class="w3-row w3-container w3-grey w3-center" style="padding-top: 100px; padding-bottom: 20px;">
+			<div class="w3-card-8 w3-white w3-padding-32" style="margin-left: 20%; margin-right: 20%;">
+				<h2><b>VALITSE LASKENTA-AJANJAKSO</b></h2><br>
+				<div>
+				   <p>Valitse laskentakausi</p>
+					<select id="kausi" class="w3-select w3-border w3-round" name="kausi" style="max-width:200px;">
+						<option value="1">Syyslaskenta</option>
+						<option value="2">Joululaskenta</option>
+						<option value="3">Kevätlaskenta</option>
+					</select>
+				</div>
+				<div>
+				   <p>Valitse laskentavuosi</p>
+					<select id="vuosi" class="w3-select w3-border w3-round" name="vuosi" style="max-width:200px;">
+						<option value="2008">2008</option>
+						<option value="2009">2009</option>
+						<option value="2010">2010</option>
+						<option value="2011">2011</option>
+						<option value="2012">2012</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+					</select>
+				</div>
+				<div style="padding-top: 30px;">
+					<button id="laske" class="w3-btn w3-light-green w3-text-white">Näytä tulokset</button>
+				</div>
+			</div> 	
+		</div>
+	<!--JSON-TAULUKKO-DIV-->
+		<div id="tulosdiv" class="w3-row w3-container w3-center w3-grey w3-responsive" style="padding-bottom:50px; padding-top: 100px;">
+			<table id="jsontaulukko" class="tablesorter w3-table-all w3-text-black w3-hoverable w3-card-4">
+				<thead>
+					<tr>
+						<th>DocumentID:</th>
+						<th>Laskentapäivämäärä:</th>
+						<th>Laskijoiden nimet:</th>
+						<th>Reitin numero: <br> <i class="fa fa-sort-desc fa-1x w3-text-light-green"></i></th>
+						<th>Yhtenäiskoordinaatit:</th>
+						<th>Yhdistyksen numero:</th>
+						<th>Yhdistyksen nimi:</th>
+						<th>Laskennan lajimäärä:</th>
+						<th>Laskennan yksilömäärä:</th>
+						<th>Laskenta-alueen kunta: <br> <i class="fa fa-sort-desc fa-1x w3-text-light-green"></i></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	<!--MODAALI-IKKUNA, JOSSA YKSITTÄISTEN LASKENTOJEN TULOKSET-->
+		<div id="laskentaikkuna" class="w3-modal w3-animate-opacity">						
+			<div class="w3-modal-content w3-card-8 w3-center w3-responsive" style="padding: 20px;">
+				<div class="w3-container" style="padding: 10px;">
+					<table class="w3-table w3-bordered" id="lintutaulukko">
+						<!--TÄHÄN ILMESTYY LINTUTAULUKKO-->
+					</table>
+				</div>
+				<div class="w3-container" style="padding: 10px;">
+					<button id="modaali" class="w3-btn w3-black" onclick="document.getElementById('laskentaikkuna').style.display='none'">Sulje</button>
+				</div>
+			</div>
+		</div>
+	<!--LOADING, JOKA ILMESTYY VAIN LATAUSVAIHEISSA-->
+		<div id="loading" class="w3-modal w3-animate-opacity"> 
+			<div class="w3-center w3-display-middle">
+				<p><i class="fa fa-spinner w3-spin" style="font-size:64px"></i></p>
+			</div>	
+		</div>
+	<!--PALAA-TAULUKON ALKUUN-NAPPI-->
+		<button id="toTop" class="w3-btn w3-light-green w3-text-white" style="margin: 5px; position: fixed; bottom: 0; right: 5px; display: none;">Palaa taulukon alkuun</button>
+	<!--FOOTER-->
+		<footer class="w3-container w3-dark-grey w3-center">
+			<p>© Moona Partanen 2016</p>
+		</footer> 
+	</body>
+</html>
